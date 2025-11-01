@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Resources\ArtistResource;
 use App\Http\Resources\WorkResource;
+use App\Models\Artist;
 use App\Models\Work;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -21,6 +23,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
             ),
         ]);
     })->name('work');
+
+    Route::get('artist', function () {
+        return Inertia::render('Artist', [
+            'paginatedArtists' => ArtistResource::collection(
+                Artist::paginate(30)
+            ),
+        ]);
+    })->name('artist');
 });
 
 require __DIR__.'/settings.php';
