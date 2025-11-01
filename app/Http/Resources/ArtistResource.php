@@ -18,7 +18,7 @@ class ArtistResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'bio' => $this->bio,
-            'birthDate' => $this->birt_date,
+            'birthDate' => $this->birth_date,
             'deathDate' => $this->death_date,
         ];
     }

@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         $Artist = new \App\Models\Artist;
         $Artist->name = 'Leonardo da Vinci';
         $Artist->bio = "Léonard de Vinci, né le 15 avril 1452 à Vinci en Italie et mort le 2 mai 1519 à Amboise en France, est un peintre, sculpteur, architecte, ingénieur, scientifique et inventeur italien de la Renaissance. Considéré comme l'un des plus grands génies de l'histoire, Léonard de Vinci est célèbre pour ses œuvres artistiques emblématiques telles que La Joconde et La Cène, ainsi que pour ses contributions dans divers domaines scientifiques et techniques.";
-        $Artist->birt_date = '1452-04-15';
+        $Artist->birth_date = '1452-04-15';
         $Artist->death_date = '1519-05-02';
         $Artist->save();
 
@@ -45,7 +45,7 @@ class DatabaseSeeder extends Seeder
         $Artist2 = new \App\Models\Artist;
         $Artist2->name = 'Edvard Munch';
         $Artist2->bio = "Edvard Munch, prononcé [muŋk], né le 12 décembre 1863 à Ådalsbruk et mort le 23 janvier 1944 à Oslo, est un peintre et graveur expressionniste norvégien. Edvard Munch peut, a posteriori, être considéré après l'exposition berlinoise de 1892, comme le pionnier de l'expressionnisme dans la peinture moderne.";
-        $Artist2->birt_date = '1863-12-12';
+        $Artist2->birth_date = '1863-12-12';
         $Artist2->death_date = '1944-01-23';
         $Artist2->save();
 
