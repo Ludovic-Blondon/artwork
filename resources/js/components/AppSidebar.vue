@@ -11,7 +11,8 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { artist, dashboard, work } from '@/routes';
+import { dashboard, work } from '@/routes';
+import { index } from '@/routes/artist';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
 import { BookOpen, Briefcase, Folder, LayoutGrid, User } from 'lucide-vue-next';
@@ -30,7 +31,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Artistes',
-        href: artist(),
+        href: index(),
         icon: User,
     },
 ];

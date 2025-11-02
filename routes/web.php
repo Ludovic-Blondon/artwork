@@ -1,9 +1,8 @@
 <?php
 
+use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\HomeController;
-use App\Http\Resources\ArtistResource;
 use App\Http\Resources\WorkResource;
-use App\Models\Artist;
 use App\Models\Work;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,13 +23,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ]);
     })->name('work');
 
-    Route::get('artist', function () {
-        return Inertia::render('Artist', [
-            'paginatedArtists' => ArtistResource::collection(
-                Artist::paginate(30)
-            ),
-        ]);
-    })->name('artist');
+    Route::get('artist', [ArtistController::class, 'index'])
+        ->name('artist.index');
+
+    Route::delete('artists/{artist}', [ArtistController::class, 'destroy'])
+        ->name('artist.destroy');
 });
 
 require __DIR__.'/settings.php';

@@ -10,17 +10,17 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import AppLayout from '@/layouts/AppLayout.vue';
-import { artist } from '@/routes';
+import { index } from '@/routes/artist';
 import { type BreadcrumbItem } from '@/types';
 import { Artist, DataPaginated } from '@/types/data';
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 import { Pencil, Trash } from 'lucide-vue-next';
 import PlaceholderPattern from '../components/PlaceholderPattern.vue';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Artist',
-        href: artist().url,
+        href: index().url,
     },
 ];
 
@@ -41,6 +41,12 @@ withDefaults(
         }),
     },
 );
+
+const confirmDelete = (artistName: string) => {
+    return window.confirm(
+        `Êtes-vous sûr de vouloir supprimer l'artiste ${artistName} ?`,
+    );
+};
 </script>
 
 <template>
@@ -109,9 +115,17 @@ withDefaults(
                                 <Button
                                     variant="destructive"
                                     size="icon"
-                                    @click="console.log('Delete')"
+                                    as-child
                                 >
-                                    <Trash class="h-4 w-4" />
+                                    <Link
+                                        :href="`/artists/${artist.id}`"
+                                        method="delete"
+                                        :onBefore="
+                                            () => confirmDelete(artist.name)
+                                        "
+                                    >
+                                        <Trash class="h-4 w-4" />
+                                    </Link>
                                 </Button>
                             </TableCell>
                         </TableRow>
