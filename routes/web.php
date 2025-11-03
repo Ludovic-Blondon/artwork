@@ -26,6 +26,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('artist', [ArtistController::class, 'index'])
         ->name('artist.index');
 
+    Route::get('artists/create', [ArtistController::class, 'create'])
+        ->name('artist.create');
+
+    Route::post('artists', [ArtistController::class, 'store'])
+        ->name('artist.store');
+
+    Route::get('artists/{artist}/edit', [ArtistController::class, 'edit'])
+        ->name('artist.edit');
+
+    Route::patch('artists/{artist}', [ArtistController::class, 'update'])
+        ->name('artist.update');
+
     Route::delete('artists/{artist}', [ArtistController::class, 'destroy'])
         ->name('artist.destroy');
 });

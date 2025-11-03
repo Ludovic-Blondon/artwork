@@ -10,11 +10,11 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import AppLayout from '@/layouts/AppLayout.vue';
-import { index } from '@/routes/artist';
+import { create, edit, index } from '@/routes/artist';
 import { type BreadcrumbItem } from '@/types';
 import { Artist, DataPaginated } from '@/types/data';
 import { Head, Link } from '@inertiajs/vue3';
-import { Pencil, Trash } from 'lucide-vue-next';
+import { Pencil, Plus, Trash } from 'lucide-vue-next';
 import PlaceholderPattern from '../components/PlaceholderPattern.vue';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -73,6 +73,14 @@ const confirmDelete = (artistName: string) => {
                     <PlaceholderPattern />
                 </div>
             </div>
+            <div class="flex justify-end">
+                <Button as-child>
+                    <Link :href="create().url">
+                        <Plus class="mr-2 h-4 w-4" />
+                        Créer un artiste
+                    </Link>
+                </Button>
+            </div>
             <div
                 class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border"
             >
@@ -93,7 +101,6 @@ const confirmDelete = (artistName: string) => {
                             v-for="artist in paginatedArtists.data"
                             :key="artist.id"
                         >
-                            {{ console.log(artist) }}
                             <TableCell class="font-medium">
                                 {{ artist.id }}
                             </TableCell>
@@ -106,11 +113,10 @@ const confirmDelete = (artistName: string) => {
                             <TableCell>{{ artist.birthDate }}</TableCell>
                             <TableCell>{{ artist.deathDate }}</TableCell>
                             <TableCell class="text-right">
-                                <Button
-                                    size="icon"
-                                    @click="console.log('Edit')"
-                                >
-                                    <Pencil class="h-4 w-4" />
+                                <Button size="icon" as-child>
+                                    <Link :href="edit(artist.id).url">
+                                        <Pencil class="h-4 w-4" />
+                                    </Link>
                                 </Button>
                                 <Button
                                     variant="destructive"
