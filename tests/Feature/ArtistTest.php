@@ -65,7 +65,7 @@ describe('Index', function () {
 
         $response->assertStatus(200)
             ->assertInertia(
-                fn($page) => $page
+                fn ($page) => $page
                     ->component('artist/Index')
                     ->has('paginatedArtists.data', 3)
             );
@@ -78,7 +78,7 @@ describe('Index', function () {
         $response = $this->actingAs($user)->get(route('artist.index'));
 
         $response->assertInertia(
-            fn($page) => $page
+            fn ($page) => $page
                 ->component('artist/Index')
                 ->has('paginatedArtists.data', 30) // 30 per page
                 ->has('paginatedArtists.meta')
@@ -99,7 +99,7 @@ describe('Create', function () {
 
         $response->assertStatus(200)
             ->assertInertia(
-                fn($page) => $page
+                fn ($page) => $page
                     ->component('artist/Form')
                     ->missing('artist')
             );
@@ -232,7 +232,7 @@ describe('Edit', function () {
 
         $response->assertStatus(200)
             ->assertInertia(
-                fn($page) => $page
+                fn ($page) => $page
                     ->component('artist/Form')
                     ->has('artist')
                     ->where('artist.id', $artist->id)

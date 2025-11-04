@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ConfirmDelete from '@/components/ConfirmDelete.vue';
 import { Button } from '@/components/ui/button';
 import {
     Table,
@@ -15,7 +16,7 @@ import { type BreadcrumbItem } from '@/types';
 import { Artist, DataPaginated } from '@/types/data';
 import { Head, Link } from '@inertiajs/vue3';
 import dayjs from 'dayjs';
-import { Pencil, Plus, Trash } from 'lucide-vue-next';
+import { Pencil, Plus } from 'lucide-vue-next';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -41,12 +42,6 @@ withDefaults(
         }),
     },
 );
-
-const confirmDelete = (artistName: string) => {
-    return window.confirm(
-        `Êtes-vous sûr de vouloir supprimer l'artiste ${artistName} ?`,
-    );
-};
 </script>
 
 <template>
@@ -109,27 +104,16 @@ const confirmDelete = (artistName: string) => {
                                       )
                                     : 'N/A'
                             }}</TableCell>
-                            <TableCell class="text-right">
-                                <Button size="icon" as-child>
+                            <TableCell class="space-x-2 text-right">
+                                <Button size="icon" class="h-7 w-7" as-child>
                                     <Link :href="edit(artist.id).url">
-                                        <Pencil class="h-4 w-4" />
+                                        <Pencil class="h-2 w-2" />
                                     </Link>
                                 </Button>
-                                <Button
-                                    variant="destructive"
-                                    size="icon"
-                                    as-child
-                                >
-                                    <Link
-                                        :href="`/artists/${artist.id}`"
-                                        method="delete"
-                                        :onBefore="
-                                            () => confirmDelete(artist.name)
-                                        "
-                                    >
-                                        <Trash class="h-4 w-4" />
-                                    </Link>
-                                </Button>
+                                <ConfirmDelete
+                                    :alert-phrase="`Etes-vous sûr de vouloir supprimer l'artiste ${artist.name} ?`"
+                                    :delete-route="`/artists/${artist.id}`"
+                                />
                             </TableCell>
                         </TableRow>
                     </TableBody>
