@@ -27,8 +27,8 @@ const handleDelete = () => {
 <template>
     <AlertDialog>
         <AlertDialogTrigger>
-            <Button variant="destructive" size="icon" class="h-7 w-7">
-                <Trash class="h-2 w-2" />
+            <Button variant="destructive" size="icon">
+                <Trash class="h-4 w-4" />
             </Button>
         </AlertDialogTrigger>
         <AlertDialogContent>

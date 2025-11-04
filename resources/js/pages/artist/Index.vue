@@ -104,10 +104,10 @@ withDefaults(
                                       )
                                     : 'N/A'
                             }}</TableCell>
-                            <TableCell class="space-x-2 text-right">
-                                <Button size="icon" class="h-7 w-7" as-child>
+                            <TableCell class="space-x-1 text-right">
+                                <Button size="icon" as-child>
                                     <Link :href="edit(artist.id).url">
-                                        <Pencil class="h-2 w-2" />
+                                        <Pencil class="h-4 w-4" />
                                     </Link>
                                 </Button>
                                 <ConfirmDelete
