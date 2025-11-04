@@ -64,9 +64,10 @@ describe('Index', function () {
         $response = $this->actingAs($user)->get(route('artist.index'));
 
         $response->assertStatus(200)
-            ->assertInertia(fn ($page) => $page
-                ->component('Artist')
-                ->has('paginatedArtists.data', 3)
+            ->assertInertia(
+                fn($page) => $page
+                    ->component('artist/Index')
+                    ->has('paginatedArtists.data', 3)
             );
     });
 
@@ -76,11 +77,12 @@ describe('Index', function () {
 
         $response = $this->actingAs($user)->get(route('artist.index'));
 
-        $response->assertInertia(fn ($page) => $page
-            ->component('Artist')
-            ->has('paginatedArtists.data', 30) // 30 per page
-            ->has('paginatedArtists.meta')
-            ->where('paginatedArtists.meta.total', 35)
+        $response->assertInertia(
+            fn($page) => $page
+                ->component('artist/Index')
+                ->has('paginatedArtists.data', 30) // 30 per page
+                ->has('paginatedArtists.meta')
+                ->where('paginatedArtists.meta.total', 35)
         );
     });
 });
@@ -96,9 +98,10 @@ describe('Create', function () {
         $response = $this->actingAs($user)->get(route('artist.create'));
 
         $response->assertStatus(200)
-            ->assertInertia(fn ($page) => $page
-                ->component('ArtistForm')
-                ->missing('artist')
+            ->assertInertia(
+                fn($page) => $page
+                    ->component('artist/Form')
+                    ->missing('artist')
             );
     });
 });
@@ -228,12 +231,13 @@ describe('Edit', function () {
         $response = $this->actingAs($user)->get(route('artist.edit', $artist));
 
         $response->assertStatus(200)
-            ->assertInertia(fn ($page) => $page
-                ->component('ArtistForm')
-                ->has('artist')
-                ->where('artist.id', $artist->id)
-                ->where('artist.name', 'Test Artist')
-                ->where('artist.bio', 'Test bio')
+            ->assertInertia(
+                fn($page) => $page
+                    ->component('artist/Form')
+                    ->has('artist')
+                    ->where('artist.id', $artist->id)
+                    ->where('artist.name', 'Test Artist')
+                    ->where('artist.bio', 'Test bio')
             );
     });
 

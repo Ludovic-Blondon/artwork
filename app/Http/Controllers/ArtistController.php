@@ -12,7 +12,7 @@ class ArtistController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Artist', [
+        return Inertia::render('artist/Index', [
             'paginatedArtists' => ArtistResource::collection(
                 Artist::paginate(30)
             ),
@@ -21,7 +21,7 @@ class ArtistController extends Controller
 
     public function create()
     {
-        return Inertia::render('ArtistForm');
+        return Inertia::render('artist/Form');
     }
 
     public function store(StoreArtistRequest $request)
@@ -33,7 +33,7 @@ class ArtistController extends Controller
 
     public function edit(Artist $artist)
     {
-        return Inertia::render('ArtistForm', [
+        return Inertia::render('artist/Form', [
             'artist' => ArtistResource::make($artist)->resolve(),
         ]);
     }

@@ -16,7 +16,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 
     Route::get('work', function () {
-        return Inertia::render('Work', [
+        return Inertia::render('work/Index', [
             'paginatedWorks' => WorkResource::collection(
                 Work::with('artist')->paginate(30)
             ),

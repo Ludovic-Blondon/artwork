@@ -16,8 +16,8 @@ test('authenticated users can visit the work page', function () {
     $response = $this->get(route('work'));
     $response->assertStatus(200)
         ->assertInertia(
-            fn ($page) => $page
-                ->component('Work')
+            fn($page) => $page
+                ->component('work/Index')
                 ->has('paginatedWorks.data', 3)
         );
 });
