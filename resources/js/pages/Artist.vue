@@ -14,8 +14,8 @@ import { create, edit, index } from '@/routes/artist';
 import { type BreadcrumbItem } from '@/types';
 import { Artist, DataPaginated } from '@/types/data';
 import { Head, Link } from '@inertiajs/vue3';
+import dayjs from 'dayjs';
 import { Pencil, Plus, Trash } from 'lucide-vue-next';
-import PlaceholderPattern from '../components/PlaceholderPattern.vue';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -56,23 +56,6 @@ const confirmDelete = (artistName: string) => {
         <div
             class="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4"
         >
-            <div class="grid auto-rows-min gap-4 md:grid-cols-3">
-                <div
-                    class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
-                >
-                    <PlaceholderPattern />
-                </div>
-                <div
-                    class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
-                >
-                    <PlaceholderPattern />
-                </div>
-                <div
-                    class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
-                >
-                    <PlaceholderPattern />
-                </div>
-            </div>
             <div class="flex justify-end">
                 <Button as-child>
                     <Link :href="create().url">
@@ -85,7 +68,7 @@ const confirmDelete = (artistName: string) => {
                 class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border"
             >
                 <Table>
-                    <TableCaption>Liste des oeuvres.</TableCaption>
+                    <TableCaption>Liste des artistes.</TableCaption>
                     <TableHeader>
                         <TableRow>
                             <TableHead class="w-[100px]">Id</TableHead>
@@ -108,10 +91,24 @@ const confirmDelete = (artistName: string) => {
                                 {{ artist.name }}
                             </TableCell>
                             <TableCell>{{
-                                artist.bio?.slice(0, 25) + ' ...'
+                                artist.bio
+                                    ? artist.bio?.slice(0, 25) + ' ...'
+                                    : 'N/A'
                             }}</TableCell>
-                            <TableCell>{{ artist.birthDate }}</TableCell>
-                            <TableCell>{{ artist.deathDate }}</TableCell>
+                            <TableCell>{{
+                                artist.birthDate
+                                    ? dayjs(artist.birthDate).format(
+                                          'DD/MM/YYYY',
+                                      )
+                                    : 'N/A'
+                            }}</TableCell>
+                            <TableCell>{{
+                                artist.deathDate
+                                    ? dayjs(artist.deathDate).format(
+                                          'DD/MM/YYYY',
+                                      )
+                                    : 'N/A'
+                            }}</TableCell>
                             <TableCell class="text-right">
                                 <Button size="icon" as-child>
                                     <Link :href="edit(artist.id).url">

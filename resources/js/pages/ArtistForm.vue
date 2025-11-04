@@ -46,7 +46,7 @@ const breadcrumbItems = computed<BreadcrumbItem[]>(() => [
     <AppLayout :breadcrumbs="breadcrumbItems">
         <Head :title="pageTitle" />
 
-        <div class="mx-auto max-w-2xl p-6">
+        <div class="mx-auto w-full max-w-2xl p-6">
             <div class="flex flex-col space-y-6">
                 <div>
                     <h2 class="text-2xl font-semibold">{{ pageTitle }}</h2>
