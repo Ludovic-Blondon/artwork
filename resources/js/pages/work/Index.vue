@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ConfirmDelete from '@/components/ConfirmDelete.vue';
 import { Button } from '@/components/ui/button';
 import {
     Table,
@@ -10,16 +11,16 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import AppLayout from '@/layouts/AppLayout.vue';
-import { work } from '@/routes';
+import { create, edit, index } from '@/routes/work';
 import { type BreadcrumbItem } from '@/types';
 import { DataPaginated, Work } from '@/types/data';
-import { Head } from '@inertiajs/vue3';
-import { Pencil, Trash } from 'lucide-vue-next';
+import { Head, Link } from '@inertiajs/vue3';
+import { Pencil, Plus } from 'lucide-vue-next';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Work',
-        href: work().url,
+        href: index().url,
     },
 ];
 
@@ -49,6 +50,14 @@ withDefaults(
         <div
             class="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4"
         >
+            <div class="flex justify-end">
+                <Button as-child>
+                    <Link :href="create().url">
+                        <Plus class="mr-2 h-4 w-4" />
+                        Créer une œuvre
+                    </Link>
+                </Button>
+            </div>
             <div
                 class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border"
             >
@@ -80,20 +89,16 @@ withDefaults(
                             }}</TableCell>
                             <TableCell>{{ work.yearCreated }}</TableCell>
                             <TableCell>{{ work.artist.name }}</TableCell>
-                            <TableCell class="text-right">
-                                <Button
-                                    size="icon"
-                                    @click="console.log('Edit')"
-                                >
-                                    <Pencil class="h-4 w-4" />
+                            <TableCell class="space-x-1 text-right">
+                                <Button size="icon" as-child>
+                                    <Link :href="edit(work.id).url">
+                                        <Pencil class="h-4 w-4" />
+                                    </Link>
                                 </Button>
-                                <Button
-                                    variant="destructive"
-                                    size="icon"
-                                    @click="console.log('Delete')"
-                                >
-                                    <Trash class="h-4 w-4" />
-                                </Button>
+                                <ConfirmDelete
+                                    :alert-phrase="`Etes-vous sûr de vouloir supprimer l'œuvre ${work.title} ?`"
+                                    :delete-route="`/works/${work.id}`"
+                                />
                             </TableCell>
                         </TableRow>
                     </TableBody>
