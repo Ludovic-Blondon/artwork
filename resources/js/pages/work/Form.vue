@@ -8,7 +8,7 @@ import { index, store, update } from '@/routes/work';
 import { type BreadcrumbItem } from '@/types';
 import { type Artist, type Work } from '@/types/data';
 import { Form, Head, Link } from '@inertiajs/vue3';
-import { computed } from 'vue';
+import { computed, ref, watch } from 'vue';
 
 interface Props {
     work?: Work;
@@ -21,6 +21,14 @@ const isEditing = computed(() => !!props.work?.id);
 const pageTitle = computed(() =>
     isEditing.value ? "Modifier l'œuvre" : 'Créer une œuvre',
 );
+
+const selectedArtistId = ref<number | string>(props.work?.artist?.id ?? '');
+
+watch(() => props.work?.artist?.id, (newVal) => {
+    if (newVal) {
+        selectedArtistId.value = newVal;
+    }
+});
 
 const formBinding = computed(() =>
     isEditing.value && props.work?.id
@@ -83,6 +91,7 @@ const breadcrumbItems = computed<BreadcrumbItem[]>(() => [
                         <select
                             id="artist_id"
                             name="artist_id"
+                            v-model="selectedArtistId"
                             class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
                             required
                         >
@@ -91,7 +100,6 @@ const breadcrumbItems = computed<BreadcrumbItem[]>(() => [
                                 v-for="artist in artists"
                                 :key="artist.id"
                                 :value="artist.id"
-                                :selected="work?.artist.id === artist.id"
                             >
                                 {{ artist.name }}
                             </option>

@@ -19,7 +19,9 @@ class WorkResource extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'yearCreated' => $this->year_created,
-            'artist' => new ArtistResource($this->whenLoaded('artist')),
+            'artist' => $this->whenLoaded('artist', function () {
+                return ArtistResource::make($this->artist)->resolve();
+            }),
         ];
     }
 }
