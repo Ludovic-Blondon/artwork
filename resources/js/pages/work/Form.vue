@@ -24,11 +24,14 @@ const pageTitle = computed(() =>
 
 const selectedArtistId = ref<number | string>(props.work?.artist?.id ?? '');
 
-watch(() => props.work?.artist?.id, (newVal) => {
-    if (newVal) {
-        selectedArtistId.value = newVal;
-    }
-});
+watch(
+    () => props.work?.artist?.id,
+    (newVal) => {
+        if (newVal) {
+            selectedArtistId.value = newVal;
+        }
+    },
+);
 
 const formBinding = computed(() =>
     isEditing.value && props.work?.id
