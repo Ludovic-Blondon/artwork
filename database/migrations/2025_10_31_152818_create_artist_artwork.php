@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('works', function (Blueprint $table) {
+        Schema::create('artworks', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->text('description')->nullable();
@@ -37,6 +37,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('artists');
-        Schema::dropIfExists('works');
+        Schema::dropIfExists('artworks');
     }
 };

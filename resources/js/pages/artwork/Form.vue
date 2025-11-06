@@ -4,28 +4,28 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AppLayout from '@/layouts/AppLayout.vue';
-import { index, store, update } from '@/routes/work';
+import { index, store, update } from '@/routes/artwork';
 import { type BreadcrumbItem } from '@/types';
-import { type Artist, type Work } from '@/types/data';
+import { type Artist, type Artwork } from '@/types/data';
 import { Form, Head, Link } from '@inertiajs/vue3';
 import { computed, ref, watch } from 'vue';
 
 interface Props {
-    work?: Work;
+    artwork?: Artwork;
     artists: Artist[];
 }
 
 const props = defineProps<Props>();
 
-const isEditing = computed(() => !!props.work?.id);
+const isEditing = computed(() => !!props.artwork?.id);
 const pageTitle = computed(() =>
     isEditing.value ? "Modifier l'œuvre" : 'Créer une œuvre',
 );
 
-const selectedArtistId = ref<number | string>(props.work?.artist?.id ?? '');
+const selectedArtistId = ref<number | string>(props.artwork?.artist?.id ?? '');
 
 watch(
-    () => props.work?.artist?.id,
+    () => props.artwork?.artist?.id,
     (newVal) => {
         if (newVal) {
             selectedArtistId.value = newVal;
@@ -34,22 +34,22 @@ watch(
 );
 
 const formBinding = computed(() =>
-    isEditing.value && props.work?.id
-        ? update.form(props.work.id)
+    isEditing.value && props.artwork?.id
+        ? update.form(props.artwork.id)
         : store.form(),
 );
 
 const breadcrumbItems = computed<BreadcrumbItem[]>(() => [
     {
-        title: 'Works',
+        title: 'Artworks',
         href: index().url,
     },
     {
         title: isEditing.value ? 'Modifier' : 'Créer',
         href:
-            isEditing.value && props.work?.id
-                ? `/works/${props.work.id}/edit`
-                : '/works/create',
+            isEditing.value && props.artwork?.id
+                ? `/artworks/${props.artwork.id}/edit`
+                : '/artworks/create',
     },
 ]);
 </script>
@@ -82,7 +82,7 @@ const breadcrumbItems = computed<BreadcrumbItem[]>(() => [
                             id="title"
                             class="mt-1 block w-full"
                             name="title"
-                            :default-value="work?.title"
+                            :default-value="artwork?.title"
                             required
                             placeholder="Titre de l'œuvre"
                         />
@@ -116,7 +116,7 @@ const breadcrumbItems = computed<BreadcrumbItem[]>(() => [
                             id="description"
                             class="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
                             name="description"
-                            :value="work?.description ?? ''"
+                            :value="artwork?.description ?? ''"
                             placeholder="Description de l'oeuvre"
                             rows="4"
                         />
@@ -133,7 +133,7 @@ const breadcrumbItems = computed<BreadcrumbItem[]>(() => [
                             type="number"
                             class="mt-1 block w-full"
                             name="year_created"
-                            :default-value="work?.yearCreated"
+                            :default-value="artwork?.yearCreated"
                             placeholder="Ex: 1889"
                             min="1"
                             max="9999"

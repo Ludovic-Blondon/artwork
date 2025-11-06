@@ -11,25 +11,25 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import AppLayout from '@/layouts/AppLayout.vue';
-import { create, edit, index } from '@/routes/work';
+import { create, edit, index } from '@/routes/artwork';
 import { type BreadcrumbItem } from '@/types';
-import { DataPaginated, Work } from '@/types/data';
+import { Artwork, DataPaginated } from '@/types/data';
 import { Head, Link } from '@inertiajs/vue3';
 import { Pencil, Plus } from 'lucide-vue-next';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Work',
+        title: 'Artwork',
         href: index().url,
     },
 ];
 
 withDefaults(
     defineProps<{
-        paginatedWorks: DataPaginated<Work>;
+        paginatedArtworks: DataPaginated<Artwork>;
     }>(),
     {
-        paginatedWorks: () => ({
+        paginatedArtworks: () => ({
             data: [],
             meta: {
                 current_page: 1,
@@ -44,7 +44,7 @@ withDefaults(
 </script>
 
 <template>
-    <Head title="Work" />
+    <Head title="Artwork" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
         <div
@@ -75,29 +75,29 @@ withDefaults(
                     </TableHeader>
                     <TableBody>
                         <TableRow
-                            v-for="work in paginatedWorks.data"
-                            :key="work.id"
+                            v-for="artwork in paginatedArtworks.data"
+                            :key="artwork.id"
                         >
                             <TableCell class="font-medium">
-                                {{ work.id }}
+                                {{ artwork.id }}
                             </TableCell>
                             <TableCell>
-                                {{ work.title }}
+                                {{ artwork.title }}
                             </TableCell>
                             <TableCell>{{
-                                work.description?.slice(0, 25) + ' ...'
+                                artwork.description?.slice(0, 25) + ' ...'
                             }}</TableCell>
-                            <TableCell>{{ work.yearCreated }}</TableCell>
-                            <TableCell>{{ work.artist.name }}</TableCell>
+                            <TableCell>{{ artwork.yearCreated }}</TableCell>
+                            <TableCell>{{ artwork.artist.name }}</TableCell>
                             <TableCell class="space-x-1 text-right">
                                 <Button size="icon" as-child>
-                                    <Link :href="edit(work.id).url">
+                                    <Link :href="edit(artwork.id).url">
                                         <Pencil class="h-4 w-4" />
                                     </Link>
                                 </Button>
                                 <ConfirmDelete
-                                    :alert-phrase="`Etes-vous sûr de vouloir supprimer l'œuvre ${work.title} ?`"
-                                    :delete-route="`/works/${work.id}`"
+                                    :alert-phrase="`Etes-vous sûr de vouloir supprimer l'œuvre ${artwork.title} ?`"
+                                    :delete-route="`/artworks/${artwork.id}`"
                                 />
                             </TableCell>
                         </TableRow>

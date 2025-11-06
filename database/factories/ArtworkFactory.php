@@ -6,9 +6,9 @@ use App\Models\Artist;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Work>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Artwork>
  */
-class WorkFactory extends Factory
+class ArtworkFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -26,7 +26,7 @@ class WorkFactory extends Factory
     }
 
     /**
-     * Work with minimal data (only required fields).
+     * Artwork with minimal data (only required fields).
      */
     public function minimal(): static
     {
@@ -37,7 +37,7 @@ class WorkFactory extends Factory
     }
 
     /**
-     * Work for a specific artist.
+     * Artwork for a specific artist.
      */
     public function forArtist(Artist|int $artist): static
     {

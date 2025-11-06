@@ -28,19 +28,19 @@ class DatabaseSeeder extends Seeder
         $Artist->death_date = '1519-05-02';
         $Artist->save();
 
-        $Work = new \App\Models\Work;
-        $Work->title = 'La joconde';
-        $Work->description = "La Joconde ou Mona Lisa est un portrait peint par Léonard de Vinci entre 1503 et 1506, peut-être jusqu'en 1517. Il représente Lisa Gherardini, l'épouse de Francesco del Giocondo, un marchand florentin. Célèbre pour son sourire énigmatique, ce tableau est considéré comme l'une des œuvres d'art les plus célèbres et les plus reconnaissables au monde.";
-        $Work->year_created = '1503';
-        $Work->artist_id = $Artist->id;
-        $Work->save();
+        $Artwork = new \App\Models\Artwork;
+        $Artwork->title = 'La joconde';
+        $Artwork->description = "La Joconde ou Mona Lisa est un portrait peint par Léonard de Vinci entre 1503 et 1506, peut-être jusqu'en 1517. Il représente Lisa Gherardini, l'épouse de Francesco del Giocondo, un marchand florentin. Célèbre pour son sourire énigmatique, ce tableau est considéré comme l'une des œuvres d'art les plus célèbres et les plus reconnaissables au monde.";
+        $Artwork->year_created = '1503';
+        $Artwork->artist_id = $Artist->id;
+        $Artwork->save();
 
-        $Work2 = new \App\Models\Work;
-        $Work2->title = 'La cène';
-        $Work2->description = "La Cène (en italien : L'Ultima Cena, soit « Le Dernier Repas ») de Léonard de Vinci est une peinture murale à la détrempe de 460 × 880 cm, réalisée de 1495 à 1498 pour le réfectoire du couvent dominicain de Santa Maria delle Grazie à Milan.";
-        $Work2->year_created = '1498';
-        $Work2->artist_id = $Artist->id;
-        $Work2->save();
+        $Artwork2 = new \App\Models\Artwork;
+        $Artwork2->title = 'La cène';
+        $Artwork2->description = "La Cène (en italien : L'Ultima Cena, soit « Le Dernier Repas ») de Léonard de Vinci est une peinture murale à la détrempe de 460 × 880 cm, réalisée de 1495 à 1498 pour le réfectoire du couvent dominicain de Santa Maria delle Grazie à Milan.";
+        $Artwork2->year_created = '1498';
+        $Artwork2->artist_id = $Artist->id;
+        $Artwork2->save();
 
         $Artist2 = new \App\Models\Artist;
         $Artist2->name = 'Edvard Munch';
@@ -49,11 +49,11 @@ class DatabaseSeeder extends Seeder
         $Artist2->death_date = '1944-01-23';
         $Artist2->save();
 
-        $Work3 = new \App\Models\Work;
-        $Work3->title = 'Le cri';
-        $Work3->description = "Le Cri (en norvégien : Skrik) est une œuvre expressionniste de l'artiste norvégien Edvard Munch dont il existe cinq versions (deux peintures, un pastel, un au crayon et une lithographie) réalisées entre 1893 et 1917. Symbolisant l'homme moderne emporté par une crise d'angoisse existentielle, elle est considérée comme l'œuvre la plus importante de l'artiste. Le paysage en arrière-plan est le fjord d'Oslo, vu d'Ekeberg.";
-        $Work3->year_created = '1893';
-        $Work3->artist_id = $Artist2->id;
-        $Work3->save();
+        $Artwork3 = new \App\Models\Artwork;
+        $Artwork3->title = 'Le cri';
+        $Artwork3->description = "Le Cri (en norvégien : Skrik) est une œuvre expressionniste de l'artiste norvégien Edvard Munch dont il existe cinq versions (deux peintures, un pastel, un au crayon et une lithographie) réalisées entre 1893 et 1917. Symbolisant l'homme moderne emporté par une crise d'angoisse existentielle, elle est considérée comme l'œuvre la plus importante de l'artiste. Le paysage en arrière-plan est le fjord d'Oslo, vu d'Ekeberg.";
+        $Artwork3->year_created = '1893';
+        $Artwork3->artist_id = $Artist2->id;
+        $Artwork3->save();
     }
 }

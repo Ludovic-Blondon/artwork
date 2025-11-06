@@ -23,7 +23,7 @@ export type Artist = {
     deathDate?: string;
 };
 
-export type Work = {
+export type Artwork = {
     id: number;
     title: string;
     description?: string;

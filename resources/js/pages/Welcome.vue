@@ -8,18 +8,18 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import { dashboard, login, register } from '@/routes';
-import { DataPaginated, Work } from '@/types/data';
+import { Artwork, DataPaginated } from '@/types/data';
 import { Head, Link } from '@inertiajs/vue3';
 
 // 🔹 Props avec valeurs par défaut cohérentes
 withDefaults(
     defineProps<{
         canRegister: boolean;
-        paginatedWorks: DataPaginated<Work>;
+        paginatedArtworks: DataPaginated<Artwork>;
     }>(),
     {
         canRegister: true,
-        paginatedWorks: () => ({
+        paginatedArtworks: () => ({
             data: [],
             meta: {
                 current_page: 1,
@@ -75,16 +75,19 @@ withDefaults(
             <main
                 class="flex w-full max-w-[335px] flex-col-reverse flex-wrap justify-center rounded-lg lg:max-w-4xl lg:flex-row"
             >
-                <div v-for="work in paginatedWorks.data" :key="work.id">
+                <div
+                    v-for="artwork in paginatedArtworks.data"
+                    :key="artwork.id"
+                >
                     <Card class="w-[350px]">
                         <CardHeader>
-                            <CardTitle>{{ work.title }}</CardTitle>
+                            <CardTitle>{{ artwork.title }}</CardTitle>
                             <CardDescription>{{
-                                work.description?.slice(0, 150) + '...'
+                                artwork.description?.slice(0, 150) + '...'
                             }}</CardDescription>
                         </CardHeader>
-                        <CardContent> {{ work.yearCreated }} </CardContent>
-                        <CardFooter> {{ work.artist.name }} </CardFooter>
+                        <CardContent> {{ artwork.yearCreated }} </CardContent>
+                        <CardFooter> {{ artwork.artist.name }} </CardFooter>
                     </Card>
                 </div>
             </main>

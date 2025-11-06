@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\ArtistController;
+use App\Http\Controllers\ArtworkController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\WorkController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -14,23 +14,23 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('work', [WorkController::class, 'index'])
-        ->name('work.index');
+    Route::get('artwork', [ArtworkController::class, 'index'])
+        ->name('artwork.index');
 
-    Route::get('works/create', [WorkController::class, 'create'])
-        ->name('work.create');
+    Route::get('artworks/create', [ArtworkController::class, 'create'])
+        ->name('artwork.create');
 
-    Route::post('works', [WorkController::class, 'store'])
-        ->name('work.store');
+    Route::post('artworks', [ArtworkController::class, 'store'])
+        ->name('artwork.store');
 
-    Route::get('works/{work}/edit', [WorkController::class, 'edit'])
-        ->name('work.edit');
+    Route::get('artworks/{artwork}/edit', [ArtworkController::class, 'edit'])
+        ->name('artwork.edit');
 
-    Route::patch('works/{work}', [WorkController::class, 'update'])
-        ->name('work.update');
+    Route::patch('artworks/{artwork}', [ArtworkController::class, 'update'])
+        ->name('artwork.update');
 
-    Route::delete('works/{work}', [WorkController::class, 'destroy'])
-        ->name('work.destroy');
+    Route::delete('artworks/{artwork}', [ArtworkController::class, 'destroy'])
+        ->name('artwork.destroy');
 
     Route::get('artist', [ArtistController::class, 'index'])
         ->name('artist.index');

@@ -9,7 +9,7 @@ test('returns a successful response', function () {
         ->assertInertia(
             fn ($page) => $page
                 ->component('Welcome')
-                ->has('paginatedWorks.data', 3)
+                ->has('paginatedArtworks.data', 3)
                 ->has('canRegister')
         );
 });

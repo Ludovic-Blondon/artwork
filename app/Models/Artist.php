@@ -21,8 +21,8 @@ class Artist extends Model
         'death_date' => 'date',
     ];
 
-    public function works()
+    public function artworks()
     {
-        return $this->hasMany(Work::class);
+        return $this->hasMany(Artwork::class);
     }
 }
