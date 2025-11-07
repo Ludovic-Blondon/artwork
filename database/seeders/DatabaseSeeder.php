@@ -34,6 +34,9 @@ class DatabaseSeeder extends Seeder
         $Artwork->year_created = '1503';
         $Artwork->artist_id = $Artist->id;
         $Artwork->save();
+        $Artwork->addMedia(base_path('tests/files/medias/joconde.jpg'))
+            ->usingName($Artwork->title)
+            ->toMediaCollection('images');
 
         $Artwork2 = new \App\Models\Artwork;
         $Artwork2->title = 'La cène';
@@ -41,6 +44,9 @@ class DatabaseSeeder extends Seeder
         $Artwork2->year_created = '1498';
         $Artwork2->artist_id = $Artist->id;
         $Artwork2->save();
+        $Artwork2->addMedia(base_path('tests/files/medias/cene.jpg'))
+            ->usingName($Artwork2->title)
+            ->toMediaCollection('images');
 
         $Artist2 = new \App\Models\Artist;
         $Artist2->name = 'Edvard Munch';
@@ -55,5 +61,8 @@ class DatabaseSeeder extends Seeder
         $Artwork3->year_created = '1893';
         $Artwork3->artist_id = $Artist2->id;
         $Artwork3->save();
+        $Artwork3->addMedia(base_path('tests/files/medias/cri.jpg'))
+            ->usingName($Artwork3->title)
+            ->toMediaCollection('images');
     }
 }

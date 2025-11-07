@@ -26,6 +26,7 @@ class StoreArtworkRequest extends FormRequest
             'description' => ['nullable', 'string'],
             'year_created' => ['nullable', 'integer', 'min:1', 'max:9999'],
             'artist_id' => ['required', 'exists:artists,id'],
+            'images.*' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:5120'],
         ];
     }
 }

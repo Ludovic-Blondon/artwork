@@ -23,10 +23,19 @@ export type Artist = {
     deathDate?: string;
 };
 
+export type Media = {
+    id: number;
+    url: string;
+    name: string;
+    size: number;
+};
+
 export type Artwork = {
     id: number;
     title: string;
     description?: string;
     yearCreated?: number;
     artist: Artist;
+    images: Media[];
+    featuredImage?: string | null;
 };

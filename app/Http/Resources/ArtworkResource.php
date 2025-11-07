@@ -22,6 +22,13 @@ class ArtworkResource extends JsonResource
             'artist' => $this->whenLoaded('artist', function () {
                 return ArtistResource::make($this->artist)->resolve();
             }),
+            'images' => $this->getMedia('images')->map(fn ($media) => [
+                'id' => $media->id,
+                'url' => $media->getUrl(),
+                'name' => $media->file_name,
+                'size' => $media->size,
+            ]),
+            'featuredImage' => $this->getFirstMediaUrl('images') ?: null,
         ];
     }
 }

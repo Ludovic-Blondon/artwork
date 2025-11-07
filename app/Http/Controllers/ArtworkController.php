@@ -30,7 +30,13 @@ class ArtworkController extends Controller
 
     public function store(StoreArtworkRequest $request)
     {
-        Artwork::create($request->validated());
+        $artwork = Artwork::create($request->validated());
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $artwork->addMedia($image)->toMediaCollection('images');
+            }
+        }
 
         return redirect()->route('artwork.index')->with('success', 'Artwork created successfully.');
     }
@@ -46,6 +52,18 @@ class ArtworkController extends Controller
     public function update(UpdateArtworkRequest $request, Artwork $artwork)
     {
         $artwork->update($request->validated());
+
+        if ($request->has('deleted_media_ids')) {
+            foreach ($request->input('deleted_media_ids') as $mediaId) {
+                $artwork->media()->where('id', $mediaId)->first()?->delete();
+            }
+        }
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $artwork->addMedia($image)->toMediaCollection('images');
+            }
+        }
 
         return redirect()->route('artwork.index')->with('success', 'Artwork updated successfully.');
     }

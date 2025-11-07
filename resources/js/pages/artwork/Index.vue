@@ -15,7 +15,7 @@ import { create, edit, index } from '@/routes/artwork';
 import { type BreadcrumbItem } from '@/types';
 import { Artwork, DataPaginated } from '@/types/data';
 import { Head, Link } from '@inertiajs/vue3';
-import { Pencil, Plus } from 'lucide-vue-next';
+import { ImageIcon, Pencil, Plus } from 'lucide-vue-next';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -65,11 +65,12 @@ withDefaults(
                     <TableCaption>Liste des oeuvres.</TableCaption>
                     <TableHeader>
                         <TableRow>
-                            <TableHead class="w-[100px]">Id</TableHead>
+                            <TableHead class="w-[80px]">Image</TableHead>
+                            <TableHead class="w-[80px]">Id</TableHead>
                             <TableHead> Titre </TableHead>
                             <TableHead>description</TableHead>
                             <TableHead>Année</TableHead>
-                            <TableHead> Autheur </TableHead>
+                            <TableHead> Auteur </TableHead>
                             <TableHead class="text-right"> Action </TableHead>
                         </TableRow>
                     </TableHeader>
@@ -78,6 +79,22 @@ withDefaults(
                             v-for="artwork in paginatedArtworks.data"
                             :key="artwork.id"
                         >
+                            <TableCell>
+                                <div
+                                    class="flex h-16 w-16 items-center justify-center overflow-hidden rounded-md border bg-muted"
+                                >
+                                    <img
+                                        v-if="artwork.featuredImage"
+                                        :src="artwork.featuredImage"
+                                        :alt="artwork.title"
+                                        class="h-full w-full object-cover"
+                                    />
+                                    <ImageIcon
+                                        v-else
+                                        class="h-8 w-8 text-muted-foreground"
+                                    />
+                                </div>
+                            </TableCell>
                             <TableCell class="font-medium">
                                 {{ artwork.id }}
                             </TableCell>
