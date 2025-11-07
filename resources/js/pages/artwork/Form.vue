@@ -41,7 +41,7 @@ const formBinding = computed(() =>
 
 const breadcrumbItems = computed<BreadcrumbItem[]>(() => [
     {
-        title: 'Artworks',
+        title: 'Oeuvres',
         href: index().url,
     },
     {

@@ -20,7 +20,7 @@ import { Pencil, Plus } from 'lucide-vue-next';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Artist',
+        title: 'Artistes',
         href: index().url,
     },
 ];
