@@ -35,6 +35,7 @@ class DatabaseSeeder extends Seeder
         $Artwork->artist_id = $Artist->id;
         $Artwork->save();
         $Artwork->addMedia(base_path('tests/files/medias/joconde.jpg'))
+            ->preservingOriginal()
             ->usingName($Artwork->title)
             ->toMediaCollection('images');
 
@@ -45,6 +46,7 @@ class DatabaseSeeder extends Seeder
         $Artwork2->artist_id = $Artist->id;
         $Artwork2->save();
         $Artwork2->addMedia(base_path('tests/files/medias/cene.jpg'))
+            ->preservingOriginal()
             ->usingName($Artwork2->title)
             ->toMediaCollection('images');
 
@@ -62,6 +64,7 @@ class DatabaseSeeder extends Seeder
         $Artwork3->artist_id = $Artist2->id;
         $Artwork3->save();
         $Artwork3->addMedia(base_path('tests/files/medias/cri.jpg'))
+            ->preservingOriginal()
             ->usingName($Artwork3->title)
             ->toMediaCollection('images');
     }
