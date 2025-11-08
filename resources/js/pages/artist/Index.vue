@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
     TableHead,
     TableHeader,
@@ -63,7 +62,6 @@ withDefaults(
                 class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border"
             >
                 <Table>
-                    <TableCaption>Liste des artistes.</TableCaption>
                     <TableHeader>
                         <TableRow>
                             <TableHead class="w-[100px]">Id</TableHead>
