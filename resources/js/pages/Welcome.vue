@@ -2,7 +2,6 @@
 import {
     Card,
     CardContent,
-    CardDescription,
     CardFooter,
     CardHeader,
     CardTitle,
@@ -82,12 +81,22 @@ withDefaults(
                     <Card class="w-[350px]">
                         <CardHeader>
                             <CardTitle>{{ artwork.title }}</CardTitle>
-                            <CardDescription>{{
-                                artwork.description?.slice(0, 150) + '...'
-                            }}</CardDescription>
                         </CardHeader>
-                        <CardContent> {{ artwork.yearCreated }} </CardContent>
-                        <CardFooter> {{ artwork.artist.name }} </CardFooter>
+                        <CardContent>
+                            <img
+                                :src="artwork.featuredImage ?? undefined"
+                                :alt="artwork.title"
+                                class="h-full w-full object-cover"
+                            />
+                        </CardContent>
+                        <CardFooter class="flex justify-between">
+                            <div>
+                                <strong>{{ artwork.artist.name }}</strong>
+                            </div>
+                            <div>
+                                <strong>{{ artwork.yearCreated }}</strong>
+                            </div>
+                        </CardFooter>
                     </Card>
                 </div>
             </main>
