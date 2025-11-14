@@ -116,6 +116,128 @@ describe('Index', function () {
 });
 
 // ============================================
+// SHOW TESTS
+// ============================================
+
+describe('Show', function () {
+    test('guests can view artwork detail page', function () {
+        $artist = Artist::factory()->create(['name' => 'Vincent van Gogh']);
+        $artwork = Artwork::factory()->create([
+            'title' => 'The Starry Night',
+            'description' => 'Famous painting of the night sky',
+            'year_created' => 1889,
+            'artist_id' => $artist->id,
+        ]);
+
+        $response = $this->get(route('artwork.show', $artwork));
+
+        $response->assertStatus(200)
+            ->assertInertia(
+                fn ($page) => $page
+                    ->component('artwork/Show')
+                    ->has('artwork')
+                    ->where('artwork.id', $artwork->id)
+                    ->where('artwork.title', 'The Starry Night')
+                    ->where('artwork.description', 'Famous painting of the night sky')
+                    ->where('artwork.yearCreated', 1889)
+            );
+    });
+
+    test('authenticated users can view artwork detail page', function () {
+        $user = User::factory()->create();
+        $artist = Artist::factory()->create(['name' => 'Pablo Picasso']);
+        $artwork = Artwork::factory()->create([
+            'title' => 'Guernica',
+            'artist_id' => $artist->id,
+        ]);
+
+        $response = $this->actingAs($user)->get(route('artwork.show', $artwork));
+
+        $response->assertStatus(200)
+            ->assertInertia(
+                fn ($page) => $page
+                    ->component('artwork/Show')
+                    ->has('artwork')
+                    ->where('artwork.id', $artwork->id)
+                    ->where('artwork.title', 'Guernica')
+            );
+    });
+
+    test('show page includes artist relationship', function () {
+        $artist = Artist::factory()->create(['name' => 'Claude Monet']);
+        $artwork = Artwork::factory()->create([
+            'title' => 'Water Lilies',
+            'artist_id' => $artist->id,
+        ]);
+
+        $response = $this->get(route('artwork.show', $artwork));
+
+        $response->assertInertia(
+            fn ($page) => $page
+                ->component('artwork/Show')
+                ->has('artwork.artist')
+                ->where('artwork.artist.name', 'Claude Monet')
+        );
+    });
+
+    test('show page includes all artists data', function () {
+        Artist::factory()->count(3)->create();
+        $artist = Artist::first();
+        $artwork = Artwork::factory()->create(['artist_id' => $artist->id]);
+
+        $response = $this->get(route('artwork.show', $artwork));
+
+        $response->assertInertia(
+            fn ($page) => $page
+                ->component('artwork/Show')
+                ->has('artists', 3)
+        );
+    });
+
+    test('returns 404 for non-existent artwork', function () {
+        $response = $this->get(route('artwork.show', 99999));
+
+        $response->assertNotFound();
+    });
+
+    test('show page handles artwork without description', function () {
+        $artist = Artist::factory()->create();
+        $artwork = Artwork::factory()->create([
+            'title' => 'Untitled',
+            'description' => null,
+            'artist_id' => $artist->id,
+        ]);
+
+        $response = $this->get(route('artwork.show', $artwork));
+
+        $response->assertStatus(200)
+            ->assertInertia(
+                fn ($page) => $page
+                    ->component('artwork/Show')
+                    ->where('artwork.description', null)
+            );
+    });
+
+    test('show page handles artwork without year', function () {
+        $artist = Artist::factory()->create();
+        $artwork = Artwork::factory()->create([
+            'title' => 'Untitled',
+            'year_created' => null,
+            'artist_id' => $artist->id,
+        ]);
+
+        $response = $this->get(route('artwork.show', $artwork));
+
+        $response->assertStatus(200)
+            ->assertInertia(
+                fn ($page) => $page
+                    ->component('artwork/Show')
+                    ->where('artwork.yearCreated', null)
+            );
+    });
+});
+
+// ============================================
 // CREATE TESTS
 // ============================================
 
