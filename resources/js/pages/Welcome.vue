@@ -78,26 +78,28 @@ withDefaults(
                     v-for="artwork in paginatedArtworks.data"
                     :key="artwork.id"
                 >
-                    <Card class="w-[350px]">
-                        <CardHeader>
-                            <CardTitle>{{ artwork.title }}</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <img
-                                :src="artwork.featuredImage ?? undefined"
-                                :alt="artwork.title"
-                                class="h-full w-full object-cover"
-                            />
-                        </CardContent>
-                        <CardFooter class="flex justify-between">
-                            <div>
-                                <strong>{{ artwork.artist.name }}</strong>
-                            </div>
-                            <div>
-                                <strong>{{ artwork.yearCreated }}</strong>
-                            </div>
-                        </CardFooter>
-                    </Card>
+                    <Link :href="`/artworks/${artwork.id}`">
+                        <Card class="w-[350px]">
+                            <CardHeader>
+                                <CardTitle>{{ artwork.title }}</CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <img
+                                    :src="artwork.featuredImage ?? undefined"
+                                    :alt="artwork.title"
+                                    class="h-full w-full object-cover"
+                                />
+                            </CardContent>
+                            <CardFooter class="flex justify-between">
+                                <div>
+                                    <strong>{{ artwork.artist.name }}</strong>
+                                </div>
+                                <div>
+                                    <strong>{{ artwork.yearCreated }}</strong>
+                                </div>
+                            </CardFooter>
+                        </Card>
+                    </Link>
                 </div>
             </main>
         </div>
