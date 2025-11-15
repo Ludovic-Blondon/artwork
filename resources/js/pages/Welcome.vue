@@ -1,11 +1,5 @@
 <script setup lang="ts">
-import {
-    Card,
-    CardContent,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from '@/components/ui/card';
+import ArtworkCard from '@/components/ArtworkCard.vue';
 import { dashboard, login, register } from '@/routes';
 import { Artwork, DataPaginated } from '@/types/data';
 import { Head, Link } from '@inertiajs/vue3';
@@ -74,33 +68,11 @@ withDefaults(
             <main
                 class="flex w-full max-w-[335px] flex-col-reverse flex-wrap justify-center gap-4 rounded-lg lg:max-w-7xl lg:flex-row"
             >
-                <div
+                <ArtworkCard
                     v-for="artwork in paginatedArtworks.data"
                     :key="artwork.id"
-                >
-                    <Link :href="`/artworks/${artwork.id}`">
-                        <Card class="w-[350px]">
-                            <CardHeader>
-                                <CardTitle>{{ artwork.title }}</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <img
-                                    :src="artwork.featuredImage ?? undefined"
-                                    :alt="artwork.title"
-                                    class="h-full w-full object-cover"
-                                />
-                            </CardContent>
-                            <CardFooter class="flex justify-between">
-                                <div>
-                                    <strong>{{ artwork.artist.name }}</strong>
-                                </div>
-                                <div>
-                                    <strong>{{ artwork.yearCreated }}</strong>
-                                </div>
-                            </CardFooter>
-                        </Card>
-                    </Link>
-                </div>
+                    :artwork="artwork"
+                />
             </main>
         </div>
         <div class="hidden h-14.5 lg:block"></div>
