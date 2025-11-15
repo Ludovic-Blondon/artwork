@@ -35,7 +35,7 @@ withDefaults(
         class="flex min-h-screen flex-col items-center bg-[#FDFDFC] p-6 text-[#1b1b18] lg:justify-center lg:p-8 dark:bg-[#0a0a0a]"
     >
         <header
-            class="mb-6 w-full max-w-full text-sm not-has-[nav]:hidden min-[800px]:max-w-[732px] min-[1150px]:max-w-[1082px] 2xl:max-w-[1448px]"
+            class="3xl:max-w-[1600px] mb-6 w-full max-w-full text-sm not-has-[nav]:hidden min-[800px]:max-w-[732px] min-[1150px]:max-w-[1082px] 2xl:max-w-[1448px]"
         >
             <nav class="flex items-center justify-end gap-4">
                 <Link
@@ -66,14 +66,12 @@ withDefaults(
             class="flex w-full items-center justify-center opacity-100 transition-opacity duration-750 lg:grow starting:opacity-0"
         >
             <main
-                style="column-gap: 1rem;"
-                class="w-full max-w-full columns-1 min-[800px]:max-w-[732px] min-[800px]:columns-2 min-[1150px]:max-w-[1082px] min-[1150px]:columns-3 2xl:max-w-[1448px] 2xl:columns-4"
+                class="masonry-grid 3xl:max-w-[1600px] w-full max-w-full columns-1 min-[800px]:max-w-[732px] min-[800px]:columns-2 min-[1150px]:max-w-[1082px] min-[1150px]:columns-3 2xl:max-w-[1448px] 2xl:columns-4"
             >
                 <div
                     v-for="artwork in paginatedArtworks.data"
                     :key="artwork.id"
-                    style="margin-bottom: 1rem;"
-                    class="break-inside-avoid"
+                    class="masonry-item"
                 >
                     <ArtworkCard :artwork="artwork" />
                 </div>
