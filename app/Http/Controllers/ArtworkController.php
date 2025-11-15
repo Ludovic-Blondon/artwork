@@ -26,6 +26,7 @@ class ArtworkController extends Controller
         return Inertia::render('artwork/Show', [
             'artwork' => ArtworkResource::make($artwork->load('artist'))->resolve(),
             'artists' => ArtistResource::collection(Artist::all())->resolve(),
+            'canRegister' => config('app.can_register', true),
         ]);
     }
 
