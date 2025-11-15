@@ -66,13 +66,17 @@ withDefaults(
             class="flex w-full items-center justify-center opacity-100 transition-opacity duration-750 lg:grow starting:opacity-0"
         >
             <main
-                class="flex w-full max-w-[335px] flex-col-reverse flex-wrap justify-center gap-4 rounded-lg lg:max-w-7xl lg:flex-row"
+                style="column-gap: 1rem;"
+                class="w-full max-w-[335px] columns-1 lg:max-w-[1082px] lg:columns-3"
             >
-                <ArtworkCard
+                <div
                     v-for="artwork in paginatedArtworks.data"
                     :key="artwork.id"
-                    :artwork="artwork"
-                />
+                    style="margin-bottom: 1rem;"
+                    class="break-inside-avoid"
+                >
+                    <ArtworkCard :artwork="artwork" />
+                </div>
             </main>
         </div>
         <div class="hidden h-14.5 lg:block"></div>
