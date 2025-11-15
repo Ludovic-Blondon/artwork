@@ -16,7 +16,7 @@ defineProps<{
 
 <template>
     <Link :href="`/artworks/${artwork.id}`">
-        <Card class="w-[350px] transition-all hover:shadow-lg hover:scale-[1.02]">
+        <Card class="w-full min-[800px]:w-[350px] transition-all hover:shadow-lg hover:scale-[1.02]">
             <CardHeader>
                 <CardTitle>{{ artwork.title }}</CardTitle>
             </CardHeader>

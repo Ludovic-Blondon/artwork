@@ -35,7 +35,7 @@ withDefaults(
         class="flex min-h-screen flex-col items-center bg-[#FDFDFC] p-6 text-[#1b1b18] lg:justify-center lg:p-8 dark:bg-[#0a0a0a]"
     >
         <header
-            class="mb-6 w-full max-w-[335px] text-sm not-has-[nav]:hidden lg:max-w-4xl"
+            class="mb-6 w-full max-w-full text-sm not-has-[nav]:hidden min-[800px]:max-w-[732px] min-[1150px]:max-w-[1082px] 2xl:max-w-[1448px]"
         >
             <nav class="flex items-center justify-end gap-4">
                 <Link
@@ -67,7 +67,7 @@ withDefaults(
         >
             <main
                 style="column-gap: 1rem;"
-                class="w-full max-w-[335px] columns-1 lg:max-w-[1082px] lg:columns-3"
+                class="w-full max-w-full columns-1 min-[800px]:max-w-[732px] min-[800px]:columns-2 min-[1150px]:max-w-[1082px] min-[1150px]:columns-3 2xl:max-w-[1448px] 2xl:columns-4"
             >
                 <div
                     v-for="artwork in paginatedArtworks.data"
